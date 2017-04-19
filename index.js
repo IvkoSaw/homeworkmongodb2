@@ -1,7 +1,9 @@
 var MongoClient = require('mongodb').MongoClient;
 
+var url = 'mongodb://localhost:27017/gsclasses'; //множественное обращение к одному и тому же я бы положил в переменную и обращался к ней
+
 //#5
-MongoClient.connect("mongodb://localhost:27017/gsclasses",function(err, db) {
+MongoClient.connect(url,function(err, db) {
     console.log("Connected correctly to server");
     db.collection("students").find().toArray(function (err, docs) {
         if(err){
@@ -14,7 +16,7 @@ MongoClient.connect("mongodb://localhost:27017/gsclasses",function(err, db) {
 });
 
 //#6
-MongoClient.connect("mongodb://localhost:27017/gsclasses",function(err, db) {
+MongoClient.connect(url,function(err, db) {
     console.log("Connected correctly to server");
     db.collection("students").find().limit(5).toArray(function (err, docs) {
         if(err){
@@ -27,7 +29,7 @@ MongoClient.connect("mongodb://localhost:27017/gsclasses",function(err, db) {
 });
 
 //#7
-MongoClient.connect("mongodb://localhost:27017/gsclasses",function(err, db) {
+MongoClient.connect(url,function(err, db) {
     console.log("Connected correctly to server");
     db.collection("students").find().skip(5).limit(5).toArray(function (err, docs) {
         if(err){
@@ -40,9 +42,9 @@ MongoClient.connect("mongodb://localhost:27017/gsclasses",function(err, db) {
 });
 
 //#8
-MongoClient.connect("mongodb://localhost:27017/gsclasses",function(err, db) {
+MongoClient.connect(url,function(err, db) {
     console.log("Connected correctly to server");
-    db.collection("students").find().limit(20).toArray(function (err, docs) {
+    db.collection("students").find()sort({id: -1/*сортировка с конца по ID*/}).limit(20).toArray(function (err, docs) {
         if(err){
             console.log(err);
         }else{
@@ -53,7 +55,7 @@ MongoClient.connect("mongodb://localhost:27017/gsclasses",function(err, db) {
 });
 
 //#9
-MongoClient.connect("mongodb://localhost:27017/gsclasses",function(err, db) {
+MongoClient.connect(url,function(err, db) {
     console.log("Connected correctly to server");
     db.collection("students").find().project({_id:true, name:true, address:true}).toArray(function (err, docs) {
         if(err){
@@ -66,7 +68,7 @@ MongoClient.connect("mongodb://localhost:27017/gsclasses",function(err, db) {
 });
 
 //#10
-MongoClient.connect("mongodb://localhost:27017/gsclasses",function(err, db) {
+MongoClient.connect(url,function(err, db) {
     console.log("Connected correctly to server");
     db.collection("students").find().sort({bonus:-1}).limit(15).toArray(function (err, docs) {
         if(err){
@@ -79,7 +81,7 @@ MongoClient.connect("mongodb://localhost:27017/gsclasses",function(err, db) {
 });
 
 //#11
-MongoClient.connect("mongodb://localhost:27017/gsclasses",function(err, db) {
+MongoClient.connect(url,function(err, db) {
     console.log("Connected correctly to server");
     db.collection("students").insertOne({
         name: 'Eobard Thawne',
@@ -126,7 +128,7 @@ MongoClient.connect("mongodb://localhost:27017/gsclasses",function(err, db) {
 });
 
 //#12
-MongoClient.connect("mongodb://localhost:27017/gsclasses",function(err, db) {
+MongoClient.connect(url,function(err, db) {
     console.log("Connected correctly to server");
     db.collection("students").insertMany([{
         name: 'Ted Smith',
@@ -206,7 +208,7 @@ MongoClient.connect("mongodb://localhost:27017/gsclasses",function(err, db) {
 });
 
 //#13
-MongoClient.connect("mongodb://localhost:27017/gsclasses",function(err, db) {
+MongoClient.connect(url,function(err, db) {
     console.log("Connected correctly to server");
     db.collection("students").updateMany({sport:"Judo"}, {$set:{company:""}},function (err, docs) {
         if(err){
@@ -220,7 +222,7 @@ MongoClient.connect("mongodb://localhost:27017/gsclasses",function(err, db) {
 
 
 // #14
-MongoClient.connect("mongodb://localhost:27017/gsclasses",function(err, db) {
+MongoClient.connect(url,function(err, db) {
     console.log("Connected correctly to server");
     db.collection("students").deleteMany({eye:"Brown"},function (err, docs) {
         if(err){
